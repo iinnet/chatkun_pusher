@@ -1,0 +1,20 @@
+{
+    "name": "nattaponra/chatkun_pusher",
+     "description": "Laravel package for make realtime chat application with Pusher Sevice",
+     "authors": [
+        {
+            "name": "Nattapon Rakthong",
+            "email": "nattapon.rakthong@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "NattaponRa\\chatkun_pusher\\": "src/"
+        }
+    },
+    "require": {
+          "php": ">=5.6.4",
+          "pusher/pusher-php-server": "^2.6"
+         
+    }
+}
