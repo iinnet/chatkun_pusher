@@ -1,5 +1,5 @@
 {
-    "name": "nattaponra/chatkun_pusher",
+    "name": "iinnet/chatkun_pusher",
      "description": "Laravel package for make realtime chat application with Pusher Sevice",
      "authors": [
         {
@@ -9,7 +9,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "NattaponRa\\chatkun_pusher\\": "src/"
+            "iinnet\\chatkun_pusher\\": "src/"
         }
     },
     "require": {
