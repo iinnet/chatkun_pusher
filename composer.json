@@ -9,7 +9,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "iinnet\\chatkun_pusher\\": "src/"
+            "Iinnet\\chatkun_pusher\\": "src/"
         }
     },
     "require": {
