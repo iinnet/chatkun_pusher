@@ -74,25 +74,29 @@
             loadUserMessage(user_name,user_id);
         }
 
-       function sendMessage(){
-            create_message_timeline($(".message_input").val(),'left','message','');
-            $("#chat_area").animate({ scrollTop: 10000 }, "fast");
-            message_input =$(".message_input").val();
-            $(".message_input").val('');
-            $.ajax({
-                method: "GET",
-                url: "{{url('chatkun/send')}}",
-                data:{
-                    _token: "{{ csrf_token() }}",
-                    to_user_id:to_user_id,
-                    message:message_input
+ function sendMessage(){
+    if($(".message_input").val().trim()!=""){
+        create_message_timeline($(".message_input").val(),'left','message','');
+        $("#chat_area").animate({ scrollTop: 10000 }, "fast");
+        message_input =$(".message_input").val();
+        $(".message_input").val('');
+        $.ajax({
+            method: "GET",
+            url: "{{url('chatkun/send')}}",
+            data:{
+                _token: "{{ csrf_token() }}",
+                to_user_id:to_user_id,
+                message:message_input
+            }
+        }).done(function( data ) {
 
-                }
-            }).done(function( data ) {
+        });
 
 
-            });
-        }
+    }
+
+  }
+
         function loadUserMessage(user_name,user_id){
             $("#chat_area").html('');
             $(".message_input").prop("disabled",false);
