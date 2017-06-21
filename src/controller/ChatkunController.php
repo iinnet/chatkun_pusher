@@ -33,22 +33,21 @@ class ChatkunController extends Controller
 
 
     public function countOnlineUser(){
+        date_default_timezone_set("Asia/Bangkok"); // Set timezone
 
         $user=Auth::user();
-
         $userOnline=ChatUserManagement::where('user_id',$user->id);
-
         if($userOnline->count()==0){
             ChatUserManagement::create(['user_id'=>Auth::user()->id,'resource_id'=>'online']);
         }else{
             ChatUserManagement::where('user_id',Auth::user()->id)->delete();
             ChatUserManagement::create(['user_id'=>Auth::user()->id,'resource_id'=>'online']);
         }
-
         // Clear User out of online
         DB::select("SET sql_mode=''");
-        DB::select("DELETE FROM chat_user_managements WHERE chat_user_managements.created_at> DATE_ADD(NOW(),INTERVAL 30 SECOND)");
+        DB::select("DELETE FROM chat_user_managements WHERE   chat_user_managements.created_at<DATE_SUB(NOW(),INTERVAL 30 SECOND)");
     }
+
     public function index(){
         $this->countOnlineUser();
         $user_id=  Input::get('user_id');
