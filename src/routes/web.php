@@ -27,4 +27,13 @@ Route::get('/chatkun/send','ChatkunController@pushMessage');
 Route::post('/chatkun/upload','ChatkunController@uploadFile');
 Route::get('/chatkun/download/{chat_message_id}/{token}','ChatkunController@download');
 
-
+Route::post('/chatkun_auth',function(){
+    if(Auth::check()){
+        $pusher = new Pusher('71baa59665e9ba7ac6e9', '8efbc5d481a62566ace8', '344751');
+        $presence_data = array('name' => Auth::user()->name);
+        echo $pusher->presence_auth($_POST['channel_name'], $_POST['socket_id'], Auth::user()->id, $presence_data);
+    }else{
+        header('', true, 403);
+        echo( "Forbidden" );
+    }
+});
