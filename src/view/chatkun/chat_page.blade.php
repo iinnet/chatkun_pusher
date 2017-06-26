@@ -11,12 +11,8 @@
                     <span class="media-heading text-semibold">{{$user->name}}</span>
                     <span class="text-size-small text-muted display-block"></span>
                 </div>
-                <div class="media-right media-middle">
-                    @if($user->online)
-                        <span class="status-mark bg-green"></span>
-                    @else
-                        <span class="status-mark bg-grey "></span>
-                    @endif
+                <div class="media-right media-middle" id="onlineStatus{{$user->id}}">
+                    <span class="status-mark bg-grey "></span>
                 </div>
             </a>
         </li>
