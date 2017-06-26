@@ -51,7 +51,28 @@
         var to_user_id;
         var pusher = new Pusher('71baa59665e9ba7ac6e9', {
             cluster: 'ap1',
-            encrypted: true
+            encrypted: true,
+            authEndpoint: '{{url('chatkun_auth')}}',
+            auth: {
+                headers: {
+                    'X-CSRF-Token': "{{ csrf_token() }}"
+                }
+            }
+        });
+
+
+        var presenceChannel = pusher.subscribe('presence-1');
+
+        presenceChannel.bind('pusher:subscription_succeeded', function(data) {
+            data.each(function(member) {
+                $("#onlineStatus"+member.id).html('<span class="status-mark bg-green"></span>');
+            });
+        });
+        presenceChannel.bind('pusher:member_removed', function(member) {
+           $("#onlineStatus"+member.id).html('<span class="status-mark bg-grey"></span>');
+        });
+        presenceChannel.bind('pusher:member_added', function(member) {
+            $("#onlineStatus"+member.id).html('<span class="status-mark bg-green"></span>');
         });
 
         var channel = pusher.subscribe('{{Auth::user()->id}}');
